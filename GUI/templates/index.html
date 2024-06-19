@@ -1,179 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Random Forest Classifier</title>
-   <style>
-       body {
-           font-family: Arial, Helvetica, sans-serif;
-           background-image: url('static/image.jpg'); /* Replace 'path_to_your_image.jpg' with the path to your image */
-           margin: 0;
-           padding: 0;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           height: 100vh; /* Full viewport height */
-       }
-       .container {
-           max-width: 600px;
-           background-color: rgba(255, 255, 255, 0.86); /* Add opacity to make content readable */
-           padding: 20px;
-           border-radius: 8px;
-           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-       }
-       h1 {
-           color: #333;
-           text-align: center;
-           margin-top: 0;
-           margin-bottom: 7.5px;
-       }
-       form {
-           /* margin-top: none; Adjust as needed */
-           margin: none;
-       }
-       label {
-           display: block;
-           margin:auto;
-           text-align: center;
-           width: 50%;
-           font-size: 18px;
-           margin-bottom: 10px;
-           color: #555;
-       }
-       input[type="file"]{
-           display: block;
-           width: 50%;
-           padding: 0.5em;
-           padding-right: auto;
-           padding-left: auto;
-           margin-left: auto;
-           margin-right: auto;
-           margin-top: 10px;
-           margin-bottom: 15px;
-           font-size: 14px;
-           border: 1px solid #ccc;
-           border-radius: 3px;
-           align-items: center;
-           border: thin solid grey;
-           text-align: center;
-           position: relative;
-           /* text-indent: 100px; */
-           /* color: transparent */
-       }
-       input[type="file"]::file-selector-button {
-           font-weight: bold;
-           color: #F386A5;
-           padding: 0.5em;
-           border: thin solid grey;
-           border-radius: 3px;
-       }
-       input[type="file"]::file-selector-button:hover {
-           background-color: #81ecec;
-           border: 1px solid #00cec9;
-       }
-       input[type="submit"] {
-           background-color: #f5a6bc;
-           color: white;
-           padding: 15px 20px;
-           border: none;
-           border-radius: 4px;
-           cursor: pointer;
-           font-size: 16px;
-           width: 100%;
-           margin: 0;
-       }
-       input[type="submit"]:hover {
-           /* background-color: #45a049; */
-           /* background:#000; */
-           color: #fff;
-           opacity:0.7;
-       }
-       .info-btn {
-           cursor: pointer;
-           background-color: #f5a6bc;
-           color: white;
-           border: none;
-           border-radius: 50%;
-           width: 30px;
-           height: 30px;
-           font-size: 16px;
-           margin-top: 0px;
-           margin-bottom: 0px;
-           position: absolute;
-           top: 144px;
-           margin: 310px;
-       }
-       .info-btn:hover {
-           color: #fff;
-           opacity:0.7;
-       }
-       .info-popup {
-           position: absolute;
-           background-color: white;
-           border: 1px solid #ccc;
-           border-radius: 5px;
-           padding: 10px;
-           width: 400px;
-           z-index: 100;
-           left: 50%; /* Centering the popup */
-           transform: translateX(-50%);
-           top: 110px; /* Adjust based on your layout */
-           display: none; /* Hide initially */
-           top: 110.5px;
-           margin: 131px;
-       }
-       .info-popup::before {
-           content: "";
-           position: absolute;
-           top: 100%; /* Adjust this value to position the arrow right above the popup */
-           left: 50%;
-           transform: translateX(-50%);
-           width: 0;
-           height: 0;
-           border-left: 10px solid transparent;
-           border-right: 10px solid transparent;
-           border-top: 10px solid white;
-       }
-   </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classifier</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url('static/image.jpg'); 
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.86);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 7.5px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .input-container {
+            margin-bottom: 15px;
+        }
+        .input-container input[type="radio"] {
+            margin-right: 10px;
+        }
+        input[type="file"] {
+            display: block;
+            width: 100%;
+            padding: 0.5em;
+            margin: 10px auto 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        input[type="file"]::file-selector-button {
+            font-weight: bold;
+            color: #F386A5;
+            padding: 0.5em;
+            border: thin solid grey;
+            border-radius: 3px;
+        }
+        input[type="file"]::file-selector-button:hover {
+            background-color: #81ecec;
+            border: 1px solid #00cec9;
+        }
+        input[type="submit"] {
+            background-color: #f5a6bc;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin: 0;
+        }
+        input[type="submit"]:hover {
+            color: #fff;
+            opacity: 0.7;
+        }
+    </style>
 </head>
 <body>
-   <div class="container">
-       <div class=".info-btn">
-           <button type="button" id="info-btn" class="info-btn">?</button>
-       </div>
-       <div id="info-popup" class="info-popup" style="display: none;">
-           Please upload tumor data as a JSON or CSV file with the following columns:
-           diagnosis, texture_mean, smoothness_mean, compactness_mean, concavity_mean, concave points_mean, symmetry_mean, fractal_dimension_mean, texture_se, smoothness_se, concave points_se, symmetry_se, fractal_dimension_se, texture_worst, smoothness_worst, compactness_worst, concavity_worst, concave points_worst, symmetry_worst, fractal_dimension_worst.
-           You can put any value in the diagnosis column. Thanks!
-       </div>
-       <h1>Random Forest Classifier</h1>
-       <form action="/predict" method="post" enctype="multipart/form-data">
-           <!-- Replace the input fields with a file input field -->
-           <label for="file">Upload Tumor Data</label>
-           <input type="file" id="file" name="file">
-           <input type="submit" value="Upload">
-           <!-- Add more input fields as necessary -->
-       </form>
-   </div>
-   <script>
-       document.getElementById('info-btn').onclick = function() {
-           var popup = document.getElementById('info-popup');
-           // Toggle the popup display on button click
-           popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
-       };
-
-
-       // Attach the event listener to the document to close the popup on clicking anywhere on the page
-       document.onclick = function(event) {
-           var popup = document.getElementById('info-popup');
-           // Check if the click is outside the popup
-           if (event.target.id !== 'info-popup' && event.target.id !== 'info-btn') {
-               popup.style.display = 'none';
-           }
-       };
-  
-   </script>
+    <div class="container">
+        <h1>Classifier</h1>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <div class="input-container">
+                <label>
+                    <input type="radio" name="input_type" value="csv" checked> CSV
+                </label>
+                <label>
+                    <input type="radio" name="input_type" value="image"> Image
+                </label>
+            </div>
+            <label for="file">Upload File</label>
+            <input type="file" id="file" name="file">
+            <input type="submit" value="Upload">
+        </form>
+    </div>
 </body>
 </html>
-
