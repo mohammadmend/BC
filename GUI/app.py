@@ -4,6 +4,8 @@ import csv
 import json
 import pandas as pd
 import tensorflow as tf
+import tensorflow_decision_forests as tfdf
+import keras
 import os
 from werkzeug.utils import secure_filename
 from PIL import Image
@@ -12,6 +14,8 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.path.join('GUI', 'static', 'uploads')
+#model = tf.keras.models.load_model('/Users/mohammadmendahawi/BC/GUI/my_saved_model')
+model = tf.saved_model.load('/Users/mohammadmendahawi/BC/GUI/my_saved_model')
 
 model2 = tf.keras.models.load_model("/Users/mohammadmendahawi/BC/GUI/done.keras")
 
